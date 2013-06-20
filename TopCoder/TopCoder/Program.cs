@@ -9,7 +9,7 @@ namespace TopCoder
         static void Main(string[] args)
         {
             BatchSystemRoulette b = new BatchSystemRoulette();
-            var r = b.expectedFinishTimes(new int[] { 13, 14, 15, 56, 56 }, new string[] { "Tim Speedle", "Tim Speedle", "Tim Speedle", "Horatio Caine", "YEEEAAAAAAAAAAH" });
+            var r = b.expectedFinishTimes(new int[] { 3, 2, 4, 1 }, new string[] { "mac taylor", "Mac Taylor", "Mac Taylor", "Peyton Driscoll" });
         }
     }
 }

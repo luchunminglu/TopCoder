@@ -50,7 +50,7 @@ public class BatchSystemRoulette
         dics.Clear();
         items.Sort(new Items());
         double[] result = new double[duration.Length];
-        double[] before = new double[items.Count];
+        double[] before = new double[items.Count+1];
         int j = 0;
         foreach (Items itemse in items)
         {
@@ -59,12 +59,30 @@ public class BatchSystemRoulette
             {
                 sum += item.duration;
             }
-            before[j++] = sum;
+            before[++j] = sum;
         }
         for (int i = 1; i < before.Length; i++)
         {
             before[i] += before[i - 1];
         }
+        for (int i = 0; i < result.Length; i++)
+        {
+            int k = 0;
+            foreach (Items itemse in items)
+            {
+                foreach (Item item in itemse.list)
+                {
+                    if (i == item.ITh)
+                    {
+                        result[i] = before[k] + item.duration/2.0 + itemse.DurationSum/2.0;
+                        break;
+                    }
+                }
+                k++;
+            }
+        }
+
+
         return result;
     }
 }
