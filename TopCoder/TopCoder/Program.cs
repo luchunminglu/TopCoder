@@ -8,9 +8,8 @@ namespace TopCoder
     {
         static void Main(string[] args)
         {
-            TicketPrinters printers = new TicketPrinters();
-            int result = printers.minTime(2, new int[] { 13, 26, 39, 13 }, new int[] { 123, 12, 32, 67, 1015 }, new int[] { 1, 2, 3, 4, 5 });
-            Console.WriteLine(result);
+            BatchSystemRoulette b = new BatchSystemRoulette();
+            var r = b.expectedFinishTimes(new int[] { 13, 14, 15, 56, 56 }, new string[] { "Tim Speedle", "Tim Speedle", "Tim Speedle", "Horatio Caine", "YEEEAAAAAAAAAAH" });
         }
     }
 }

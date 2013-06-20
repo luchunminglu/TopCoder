@@ -2,91 +2,70 @@
 
 public class BatchSystemRoulette
 {
-
-    public class Comp : IComparer<KeyValuePair<string, List<Tuple<int, int, string>>>>
+    public class Item
     {
-        public int Compare(KeyValuePair<string, List<Tuple<int, int, string>>> x, KeyValuePair<string, List<Tuple<int, int, string>>> y)
-        {
-            int sum1 = 0;
-            foreach (Tuple<int, int, string> v1 in x.Value)
-            {
-                sum1 += v1.Item2;
-            }
-            int sum2 = 0;
-            foreach (Tuple<int, int, string> v2 in y.Value)
-            {
-                sum2 += v2.Item2;
-            }
-            return sum1 - sum2;
-        }
+        public int duration;
+        public int ITh;
     }
 
-    public class Tuple<t1,t2,t3>
+    public class Items : IComparer<Items>
     {
-        public t1 Item1;
-        public t2 Item2;
-        public t3 Item3;
-
-        public Tuple(t1 tt1, t2 tt2, t3 tt3)
+        public int DurationSum;
+        public List<Item> list = new List<Item>();
+        public int Compare(Items x, Items y)
         {
-            Item1 = tt1;
-            Item2 = tt2;
-            Item3 = tt3;
+            return x.DurationSum - y.DurationSum;
         }
     }
 
     public double[] expectedFinishTimes(int[] duration, string[] user)
     {
-        List<Tuple<int, int, string>> lists = new List<Tuple<int, int, string>>();
+        Dictionary<string, Items> dics = new Dictionary<string, Items>();
         for (int i = 0; i < duration.Length; i++)
         {
-            lists.Add(new Tuple<int, int, string>(i, duration[i], user[i]));
-        }
-
-        Dictionary<string, List<Tuple<int, int, string>>> dics = new Dictionary<string, List<Tuple<int, int, string>>>();
-        foreach (Tuple<int, int, string> item in lists)
-        {
-            if (dics.ContainsKey(item.Item3))
+            Item item = new Item();
+            item.ITh = i;
+            item.duration = duration[i];
+            if (dics.ContainsKey(user[i]))
             {
-                dics[item.Item3].Add(item);
+                dics[user[i]].list.Add(item);
             }
             else
             {
-                List<Tuple<int, int, string>> l = new List<Tuple<int, int, string>>();
-                l.Add(item);
-                dics.Add(item.Item3, l);
+                dics.Add(user[i], new Items());
+                dics[user[i]].list.Add(item);
             }
         }
-        List<KeyValuePair<string, List<Tuple<int, int, string>>>> v = new List<KeyValuePair<string, List<Tuple<int, int, string>>>>();
-        foreach (KeyValuePair<string, List<Tuple<int, int, string>>> dic in dics)
+        List<Items> items = new List<Items>();
+        foreach (string key in dics.Keys)
         {
-            v.Add(dic);
-        }
-        v.Sort(new Comp());
-        List<Tuple<int, int, string>> ll = new List<Tuple<int, int, string>>();
-        foreach (KeyValuePair<string, List<Tuple<int, int, string>>> keyValuePair in v)
-        {
-            foreach (Tuple<int, int, string> tuple in keyValuePair.Value)
+            int sum = 0;
+            foreach (Item item in dics[key].list)
             {
-                ll.Add(tuple);
+                sum += item.duration;
             }
+            dics[key].DurationSum = sum;
+            items.Add(dics[key]);
         }
+        dics.Clear();
+        items.Sort(new Items());
         double[] result = new double[duration.Length];
-        for (int i = 0; i < duration.Length; i++)
+        double[] before = new double[items.Count];
+        int j = 0;
+        foreach (Items itemse in items)
         {
-            double sum = 0;
-            for (int j = 0; j < ll.Count; j++)
+            int sum = 0;
+            foreach (Item item in itemse.list)
             {
-                sum += ll[j].Item2;
-                if (i == ll[j].Item1)
-                {
-                    break;
-                }
+                sum += item.duration;
             }
-            result[i] = sum;
+            before[j++] = sum;
+        }
+        for (int i = 1; i < before.Length; i++)
+        {
+            before[i] += before[i - 1];
         }
         return result;
-
     }
 }
 

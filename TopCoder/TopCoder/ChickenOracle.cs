@@ -32,7 +32,7 @@ public class ChickenOracle
                 break;
             }
 
-            if (chikenTrue == chickenCount)
+            if (chikenTrue == chickenCount && eggTrue >=0)
             {
                 chicken = true;
                 break;
@@ -40,7 +40,7 @@ public class ChickenOracle
         }
 
         //egg
-        for (int i = 0; i <= liarCount && i<=group1 && (liarCount-i)<=group2; i++)
+        for (int i = 0; i <= liarCount; i++)
         {
             if (i > group1 || (liarCount - i) > group2)
             {
@@ -56,7 +56,7 @@ public class ChickenOracle
                 break;
             }
 
-            if (chikenTrue == chickenCount)
+            if (chikenTrue == chickenCount && eggTrue>=0)
             {
                 egg = true;
                 break;
