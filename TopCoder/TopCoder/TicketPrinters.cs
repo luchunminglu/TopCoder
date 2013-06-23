@@ -14,9 +14,9 @@ public class TicketPrinters
         pos = new int[startingValues.Length];
         for (int i = 1; i < pos.Length; i++)
         {
-            pos[i] = pos[i-1]+printerDistance[i-1];
+            pos[i] = pos[i - 1] + printerDistance[i - 1];
         }
-        Dictionary<string,int> dics = new Dictionary<string, int>();
+        Dictionary<string, int> dics = new Dictionary<string, int>();
         return Time(currentPrinter, dics, 0, 0, currentPrinter, currentPrinter, wantedUnUsed, printerDistance, startingValues, wantedValues);
     }
 
@@ -31,20 +31,19 @@ public class TicketPrinters
             StringBuilder list = new StringBuilder("(");
             foreach (int j in wantedUnUsed)
             {
-                list.Append( j + ",");
+                list.Append(j + ",");
             }
             list.Append(")");
             return string.Format("({0},{1},{2})", CurrentPrinter, LowPrinter, list);
         }
     }
-    static    Item item = new Item();
-    private int Time(int currentPrinter,Dictionary<string,int> dics, int passedTime, int lastTime, int lowPrinter, int highPrinter, List<int> wantedUnUsed, int[] printerDistance, int[] startingValues, int[] wantedValues)
+    static Item item = new Item();
+    private int Time(int currentPrinter, Dictionary<string, int> dics, int passedTime, int lastTime, int lowPrinter, int highPrinter, List<int> wantedUnUsed, int[] printerDistance, int[] startingValues, int[] wantedValues)
     {
         if (wantedUnUsed.Count == 1)
             return Math.Max(lastTime, Math.Abs(startingValues[currentPrinter] - wantedValues[wantedUnUsed[0]]) + 1 + passedTime);
 
-        item.CurrentPrinter = currentPrinter;
-
+    
         int low = lowPrinter - 1;
         int high = highPrinter + 1;
         int min = int.MaxValue;
@@ -58,9 +57,18 @@ public class TicketPrinters
             if (low < 0)
             {
                 item.LowPrinter = lowPrinter;
-                
-                int cur = Time(high, dics, passedTime + Move(currentPrinter, high, printerDistance), usedTime,
-                               lowPrinter, high, lleft, printerDistance, startingValues, wantedValues);
+                item.CurrentPrinter = high;
+                int cur = -1;
+                if (dics.ContainsKey(item.ToString()))
+                {
+                    cur = dics[item.ToString()];
+                }
+                else
+                {
+                    cur = Time(high, dics, passedTime + Move(currentPrinter, high, printerDistance), usedTime,
+               lowPrinter, high, lleft, printerDistance, startingValues, wantedValues);
+                }
+
                 if (cur < min)
                 {
                     choice = i;
@@ -69,23 +77,76 @@ public class TicketPrinters
             }
             else if (high >= wantedValues.Length)
             {
-                min = Math.Min(min,
-                               Time(low, dics, passedTime + Move(low, currentPrinter, printerDistance), usedTime, low,
-                                    highPrinter, lleft, printerDistance, startingValues, wantedValues));
+                int cur = -1;
+                item.LowPrinter = low;
+                item.CurrentPrinter = low;
+                if (dics.ContainsKey(item.ToString()))
+                {
+                    cur = dics[item.ToString()];
+                }
+                else
+                {
+                    cur = Time(low, dics, passedTime + Move(low, currentPrinter, printerDistance), usedTime, low,
+                               highPrinter, lleft, printerDistance, startingValues, wantedValues);
+                }
+                if (cur < min)
+                {
+                    choice = i;
+                    min = cur;
+                }
             }
             else
             {
                 List<int> lright = new List<int>(lleft);
-                min = Math.Min(min,
-                               Math.Min(
-                                   Time(low, dics, passedTime + Move(low, currentPrinter, printerDistance), usedTime,
-                                        low, highPrinter, lleft, printerDistance, startingValues, wantedValues),
-                                   Time(high, dics, passedTime + Move(currentPrinter, high, printerDistance), usedTime,
-                                        lowPrinter, high, lright, printerDistance, startingValues, wantedValues)));
+                item.CurrentPrinter = low;
+                int curl = -1;
+                int curr = -1;
+                item.LowPrinter = low;
+                if (dics.ContainsKey(item.ToString()))
+                {
+                    curl = dics[item.ToString()];
+                }
+                else
+                {
+                    curl =
+                        Time(low, dics, passedTime + Move(low, currentPrinter, printerDistance), usedTime,
+                             low, highPrinter, lleft, printerDistance, startingValues, wantedValues);
+                }
+
+                item.LowPrinter = lowPrinter;
+                item.CurrentPrinter = high;
+                if (dics.ContainsKey(item.ToString()))
+                {
+                    curr = dics[item.ToString()];
+                }
+                else
+                {
+                    curr = Time(high, dics, passedTime + Move(currentPrinter, high, printerDistance), usedTime,
+                                lowPrinter, high, lright, printerDistance, startingValues, wantedValues);
+                }
+                int curmin = Math.Min(curl, curr);
+
+                if (min > curmin)
+                {
+                    min = curmin;
+                    choice = i;
+                }
             }
         }
+        List<int> llef = new List<int>(wantedUnUsed);
+        llef.Remove(choice);
+        item.LowPrinter = lowPrinter;
+        item.wantedUnUsed = llef;
+        item.CurrentPrinter = currentPrinter;
 
-        //dics[str] = min;
+        if (dics.ContainsKey(item.ToString()))
+        {
+            dics[item.ToString()] = Math.Min(min, dics[item.ToString()]);
+        }
+        else
+        {
+            dics[item.ToString()] = min;
+        }
         return min;
     }
     private int Move(int low, int high, int[] printerDistance)

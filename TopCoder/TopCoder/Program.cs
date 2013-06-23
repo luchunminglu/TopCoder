@@ -12,19 +12,17 @@ namespace TopCoder
             int result = printers.minTime(2,
                                           new int[]
                                               {
-                                             12398, 16350, 41097
+848091, 272744, 37065, 438282
                                               },
                                           new int[]
                                               {
-373859, 152054, 223916, 395003
+826358, 36950, 198537, 767967, 435356
                                               },
                                           new int[] 
                                           {
-                                             635542, 497593, 500631, 497941
+184405, 282255, 92828, 600999, 826697
                                           });
             Console.WriteLine(result);
-            Console.ReadLine();
-            Console.ReadLine();
         }
     }
 
