@@ -116,7 +116,7 @@ namespace TopCoder
                     ret = Math.Min(ret, cur);
                 }
             }
-            return dp[side,min,rem];
+            return dp[side, min, rem] = ret;
         }
 
 
