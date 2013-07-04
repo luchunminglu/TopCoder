@@ -43,14 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BatchSystemRoulette.cs" />
-    <Compile Include="ChickenOracle.cs" />
-    <Compile Include="CountExpressions2.cs" />
+    <Compile Include="Passed\BatchSystemRoulette.cs" />
+    <Compile Include="Passed\ChickenOracle.cs" />
+    <Compile Include="Passed\CountExpressions2.cs" />
     <Compile Include="LargestCircle2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TemperatureScales2.cs" />
-    <Compile Include="TicketPrinters.cs" />
+    <Compile Include="Passed\TemperatureScales2.cs" />
+    <Compile Include="Passed\TicketPrinters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
