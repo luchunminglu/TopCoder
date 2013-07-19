@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryCode.cs" />
+    <Compile Include="Egalitarianism.cs" />
+    <Compile Include="Excavations2.cs" />
     <Compile Include="Lottery.cs" />
     <Compile Include="Passed\BatchSystemRoulette.cs" />
     <Compile Include="Passed\ChickenOracle.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Passed\TemperatureScales2.cs" />
     <Compile Include="Passed\TicketPrinters.cs" />
+    <Compile Include="TopFox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
