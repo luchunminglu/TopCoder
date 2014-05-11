@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="BinaryCode.cs" />
     <Compile Include="Egalitarianism.cs" />
-    <Compile Include="Excavations2.cs" />
     <Compile Include="Lottery.cs" />
     <Compile Include="Passed\BatchSystemRoulette.cs" />
     <Compile Include="Passed\ChickenOracle.cs" />
