@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bonuses.cs" />
+    <Compile Include="ExerciseMachine.cs" />
+    <Compile Include="Passed\ImageDithering.cs" />
     <Compile Include="Passed\BinaryCode.cs" />
     <Compile Include="Egalitarianism.cs" />
     <Compile Include="Lottery.cs" />

@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryCodeTest.cs" />
-    <Compile Include="BonusesTest.cs" />
+    <Compile Include="ExerciseMachineTest.cs" />
     <Compile Include="LotteryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
