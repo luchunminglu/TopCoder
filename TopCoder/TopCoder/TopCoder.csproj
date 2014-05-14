@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Passed\Bonuses.cs" />
+    <Compile Include="Passed\ExerciseMachine.cs" />
     <Compile Include="Passed\ImageDithering.cs" />
     <Compile Include="Passed\BinaryCode.cs" />
     <Compile Include="Egalitarianism.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Passed\TemperatureScales2.cs" />
     <Compile Include="Passed\TicketPrinters.cs" />
     <Compile Include="Passed\Time.cs" />
+    <Compile Include="RectangularGrid.cs" />
     <Compile Include="TopFox.cs" />
   </ItemGroup>
   <ItemGroup>

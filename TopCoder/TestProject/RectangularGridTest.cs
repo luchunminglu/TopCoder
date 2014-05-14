@@ -6,11 +6,11 @@ namespace TestProject
     
     
     /// <summary>
-    ///This is a test class for ExerciseMachineTest and is intended
-    ///to contain all ExerciseMachineTest Unit Tests
+    ///This is a test class for RectangularGridTest and is intended
+    ///to contain all RectangularGridTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class ExerciseMachineTest
+    public class RectangularGridTest
     {
 
 
@@ -64,16 +64,17 @@ namespace TestProject
 
 
         /// <summary>
-        ///A test for getPercentages
+        ///A test for countRectangles
         ///</summary>
         [TestMethod()]
-        public void getPercentagesTest()
+        public void countRectanglesTest()
         {
-            ExerciseMachine target = new ExerciseMachine(); // TODO: Initialize to an appropriate value
-            string time = "00:28:00"; // TODO: Initialize to an appropriate value
-            int expected = 0; // TODO: Initialize to an appropriate value
-            int actual;
-            actual = target.getPercentages(time);
+            RectangularGrid target = new RectangularGrid(); // TODO: Initialize to an appropriate value
+            int width = 592; // TODO: Initialize to an appropriate value
+            int height = 964; // TODO: Initialize to an appropriate value
+            long expected = 81508708664; // TODO: Initialize to an appropriate value
+            long actual;
+            actual = target.countRectangles(width, height);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
