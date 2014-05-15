@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace TestProject
@@ -74,7 +75,10 @@ namespace TestProject
             int height = 964; // TODO: Initialize to an appropriate value
             long expected = 81508708664; // TODO: Initialize to an appropriate value
             long actual;
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
             actual = target.countRectangles(width, height);
+            watch.Stop();
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
