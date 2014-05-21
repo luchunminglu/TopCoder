@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BinaryCodeTest.cs" />
     <Compile Include="LotteryTest.cs" />
+    <Compile Include="MasterbrainTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RectangularGridTest.cs" />
   </ItemGroup>

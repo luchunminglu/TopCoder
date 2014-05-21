@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Masterbrain.cs" />
     <Compile Include="Passed\Bonuses.cs" />
     <Compile Include="Passed\ExerciseMachine.cs" />
     <Compile Include="Passed\ImageDithering.cs" />
