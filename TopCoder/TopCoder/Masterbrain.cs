@@ -8,19 +8,12 @@ public class Masterbrain
     {
         var list = new List<string>();
         for (int i = 1; i <= 7; i++)
-        {
             for (int j = 1; j <= 7; j++)
-            {
                 for (int k = 1; k <= 7; k++)
-                {
                     for (int l = 1; l <= 7; l++)
-                    {
                         list.Add("" + i + j + k + l);
-                    }
-                }
-            }
-        }
-        List<string> totalList = new List<string>();
+
+        var totalList = new List<string>();
 
         for (int i = 0; i < results.Length; i++)
         {
@@ -29,10 +22,7 @@ public class Masterbrain
             for (int j = 0; j < results.Length; j++)
             {
                 if (j == i)
-                {
-                    //assume i is the wrong one
                     continue;
-                }
                 all.RemoveAll(s => Result(s, guesses[j]) != results[j]);
             }
             totalList.AddRange(all);
@@ -44,28 +34,27 @@ public class Masterbrain
 
     public string Result(string secret, string guess)
     {
-        int black = 0;
-        int white = 0;
-        bool[] array = new bool[secret.Length];
-
+        int black = 0, white = 0;
+        bool[] array = new bool[secret.Length], array2 = new bool[secret.Length];
         for (int i = 0; i < guess.Length; i++)
         {
+            if (secret[i] == guess[i])
+            {
+                black++;
+                array[i] = array2[i] = true;
+            }
+        }
+        for (int i = 0; i < secret.Length; i++)
+        {
+            if (array2[i])
+                continue;
             for (int j = 0; j < secret.Length; j++)
             {
                 if (!array[j] && secret[j] == guess[i])
                 {
-                    if (i == j)
-                    {
-                        black++;
-                        array[j] = true;
-                        break;
-                    }
-                    else
-                    {
-                        white++;
-                        array[j] = true;
-                        break;
-                    }
+                    white++;
+                    array[j] = true;
+                    break;
                 }
             }
         }
