@@ -8,7 +8,8 @@ namespace TopCoder
     {
         static void Main(string[] args)
         {
-           
+            string s = new CorruptedMessage().reconstructMessage("abc", 3);
+            Console.WriteLine(s);
         }
     }
 }
