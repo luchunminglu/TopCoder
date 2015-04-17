@@ -1,0 +1,3 @@
+TopCoder分为两个阶段：
+Coding Phase:	编码提交，能够编译就算提交成功  计时是从打开题开始算的
+Challenge Phase:检验别人的代码
