@@ -3,53 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class CorruptedMessage
+public class DevuAndGame
 {
-    public string reconstructMessage(string s, int k)
+    private bool[] marked;
+    public String canWin(int[] nextLevel)
     {
-        HashSet<Char> set = new HashSet<char>();
-        foreach (var ch in s)
+        marked = new bool[nextLevel.Length];
+        int index = 0;
+        while (!marked[index])
         {
-            set.Add(ch);
-        }
-
-        bool isFound = false;
-        Char c = 'i';
-        foreach (var ch in set.ToList())
-        {
-            if (isFound)
+            int next = nextLevel[index];
+            if (next == -1)
             {
-                break;
-            }
-            c = ch;
-
-            int t = 0;
-            foreach (var si in s)
-            {
-                if (si != c)
-                {
-                    t++;
-                }
+                return "Win";
             }
 
-            if (t == k)
+            if (next < 0 || next >= nextLevel.Length)
             {
-                isFound = true;
-                break;
+                return "Lose";
             }
+
+            marked[index] = true;
+            index = next;
         }
 
-        if (!isFound)
-        {
-            c = "abcdefghijklmnopqrstuvwxyz".ToCharArray().ToList().FirstOrDefault(r => !set.Contains(r));
-        }
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < s.Length; i++)
-        {
-            sb.Append(c + "");
-        }
-        return sb.ToString();
+        return "Lose";
     }
+
 }
 
